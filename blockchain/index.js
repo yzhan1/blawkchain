@@ -1,3 +1,4 @@
+const logger = require('tracer').console();
 const Block = require('./block');
 
 class Blockchain {
@@ -21,8 +22,7 @@ class Blockchain {
     for (let i = 1; i < chain.length; i++) {
       const block = chain[i];
       const prevBlock = chain[i - 1];
-      if (block.prevHash !== prevBlock.hash ||
-          block.hash !== Block.blockHash(block)) {
+      if (block.prevHash !== prevBlock.hash || block.hash !== Block.blockHash(block)) {
         return false;
       }
     }
@@ -31,14 +31,14 @@ class Blockchain {
   
   replace(chain) {
     if (chain.length <= this.chain.length) {
-      console.log('New chain shorted than current');
+      logger.error('New chain shorted than current');
       return;
     } else if (!this.isValid(chain)) {
-      console.log('New chain is not valid');
+      logger.error('New chain is not valid');
       return;
     }
 
-    console.log('Replacing current chain with new chain');
+    logger.info('Replacing current chain with new chain');
     this.chain = chain;
   }
 }

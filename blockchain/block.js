@@ -1,4 +1,5 @@
 const SHA256 = require('crypto-js/sha256');
+const logger = require('tracer').console();
 
 class Block {
   constructor(timestamp, prevHash, hash, data) {
