@@ -22,6 +22,8 @@ app.post('/mine', (req, res) => {
   const block = blockchain.addBlock(req.body.data);
   logger.info(`New block added: ${block.toString()}`);
 
+  p2pServer.syncChains();
+
   res.redirect('/blocks');
 });
 
